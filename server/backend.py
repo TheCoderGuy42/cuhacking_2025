@@ -4,15 +4,50 @@ import requests
 import os 
 import googlemaps
 import psycopg2
+import time
+from dotenv import load_dotenv
+import requests
+import json
 
-app = Flask(__name__)
+load_dotenv()
+
+"""app = Flask(__name__)
 
 @app.route("/")
-def Test():
+def Testing():
     return "<p>Test</p>"
+"""
+class Test:
+    def __init__(self):
+        self.key = os.getenv("API_KEY")  # Ensure this is set in your .env file
+
+    def get_distance(self):
+        url = "https://routes.googleapis.com/directions/v2:computeRoutes"
+        headers = {
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": self.key,
+            "X-Goog-FieldMask": "routes.distanceMeters,routes.duration"
+        }
+        payload = {
+            "origin": {
+                "address": "Waterloo, ON"
+            },
+            "destination": {
+                "address": "Milton, ON"
+            },
+            "travelMode": "DRIVE"
+        }
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        data = response.json()
+        return data
 
 if __name__ == "__main__":
-    app.run()
+    test = Test()
+    distance = test.get_distance()
+    print(distance)
+
+
+
 
 
 # database connection 
@@ -24,3 +59,6 @@ def connect():
         password="password"
     )
     return
+
+
+

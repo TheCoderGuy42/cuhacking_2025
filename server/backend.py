@@ -1,4 +1,9 @@
 from flask import Flask, request, jsonify
+from bs4 import BeautifulSoup
+import requests 
+import os 
+import googlemaps
+import psycopg2
 
 app = Flask(__name__)
 
@@ -8,3 +13,14 @@ def Test():
 
 if __name__ == "__main__":
     app.run()
+
+
+# database connection 
+def connect():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="postgres",
+        user="postgres",
+        password="password"
+    )
+    return

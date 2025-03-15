@@ -41,6 +41,13 @@ class Test:
         data = response.json()
         return data
 
+
+def scrape():
+     url = "https://volunteerottawa.ca/volunteer/search-volunteer-opportunities/"
+     response = requests.get(url)
+     soup = BeautifulSoup(response.text, "html.parser")
+
+
 if __name__ == "__main__":
     test = Test()
     distance = test.get_distance()

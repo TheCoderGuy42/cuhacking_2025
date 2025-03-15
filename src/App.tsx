@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./App.css";
+import React, { useState } from "react";
+import "../client/App.css";
 
 interface cardProp {
   title: string;
@@ -41,12 +41,18 @@ function App() {
   const [Todo, setTodo] = useState("");
   return (
     <>
-      <form>
-        <label>First name:</label>
-        <input type="text" id="fname" name="fname" className="border-2" />
-      </form>
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <TodoPost
+            title="Testing1"
+            orginization="Testing2"
+            orginizationTypes="Testing3"
+            volunteerTypes="Testing4"
+            duration="testing5"
+            applicationDeadline="testing6"
+            website="testing7"
+          />
+        </div>
       </div>
     </>
   );

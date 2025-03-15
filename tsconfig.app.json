@@ -17,7 +17,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["client /src/*"]
+      "@/*": ["client/src/*"]
     },
 
     /* Linting */
@@ -27,5 +27,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["client /src"]
+  "include": ["client/src"]
 }

@@ -43,15 +43,30 @@ const TodoPost = ({
 
 function App() {
   const [Todo, setTodo] = useState("");
-  const { isLoading, error } = useAuth0();
+  const { isLoading, error, isAuthenticated, user } = useAuth0();
 
   console.log(window.location.origin);
+  console.log("user", user);
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
+  // if (isAuthenticated) {
+  //   return (
+  //     <>
+  //       <LogoutButton />
+  //       <Profile />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
-      <Profile />
-      <LoginButton />
-      <LogoutButton />
+      {!isAuthenticated ? <LoginButton /> : <LogoutButton />}
+
+      {/* <LoginButton />
+      <LogoutButton /> */}
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

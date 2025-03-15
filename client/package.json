@@ -1,0 +1,8 @@
+{
+  "name": "cuhacking-2025-client",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd .. && npm run dev:client"
+  }
+}

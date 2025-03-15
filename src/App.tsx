@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "../client/App.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import Profile from "../client/components/profile";
+import LoginButton from "../client/components/login";
+import LogoutButton from "../client/components/logout";
 
 interface cardProp {
   title: string;
@@ -39,8 +43,16 @@ const TodoPost = ({
 
 function App() {
   const [Todo, setTodo] = useState("");
+  const { isLoading, error } = useAuth0();
+
+  console.log(window.location.origin);
+
   return (
     <>
+      <Profile />
+      <LoginButton />
+      <LogoutButton />
+
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <TodoPost

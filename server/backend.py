@@ -54,15 +54,6 @@ if __name__ == "__main__":
     print(distance)
 
 
-
-
-# web scraping
-def scrape():
-    url = "https://volunteerottawa.ca/volunteer/search-volunteer-opportunities/"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-
-
 # database connection 
 def connect():
     conn = psycopg2.connect(

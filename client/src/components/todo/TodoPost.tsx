@@ -6,8 +6,8 @@ import React from "react";
 interface TodoPostProp {
   id: number;
   title: string;
-  orginization: string;
-  orginizationTypes: string;
+  organization: string;
+  organizationTypes: string;
   volunteerTypes: string;
   commitment: string;
   location: string;
@@ -19,8 +19,8 @@ interface TodoPostProp {
 const TodoPost = ({
   id,
   title,
-  orginization,
-  orginizationTypes,
+  organization,
+  organizationTypes,
   volunteerTypes,
   commitment,
   location,
@@ -79,6 +79,11 @@ const TodoPost = ({
           {value} {unit}
           {value !== 1 && unit === "day" ? "s" : ""}
         </div>
+        <div className="absolute top-5 right-5 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center shadow-sm z-10">
+          <Clock className="mr-1 h-3 w-3" />
+          {value} {unit}
+          {value !== 1 && unit === "day" ? "s" : ""}
+        </div>
         <div className="absolute top-2 left-2 bg-orange-500 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center shadow-sm z-10">
           {points} points
         </div>
@@ -88,7 +93,7 @@ const TodoPost = ({
             {title}
           </h2>
           <p className="text-sm font-medium text-muted-foreground">
-            {orginization}
+            {organization}
           </p>
         </CardHeader>
         <CardContent className="flex-grow">
@@ -99,9 +104,9 @@ const TodoPost = ({
               </span>
               <span
                 className="text-muted-foreground line-clamp-2 flex-1"
-                title={orginizationTypes}
+                title={organizationTypes}
               >
-                {orginizationTypes}
+                {organizationTypes}
               </span>
             </div>
 

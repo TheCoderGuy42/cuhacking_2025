@@ -117,8 +117,8 @@ function TodoList({ searchTerm, locationFilter, maxTime }: TodoListProps) {
               key={todo.id}
               id={todo.id}
               title={todo.title}
-              orginization={todo.orginization}
-              orginizationTypes={todo.orginizationTypes}
+              organization={todo.orginization}
+              organizationTypes={todo.orginizationTypes}
               volunteerTypes={todo.volunteerTypes}
               commitment={todo.commitment}
               location={todo.location}

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // "use client";
 
+=======
+>>>>>>> origin/client_stuff
 import * as React from "react";
 import { cn } from "../../lib/utils";
 import {
@@ -198,14 +201,16 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent hover:bg-secondary/20 text-dark"
-                  )}
-                >
-                  Contact
-                </NavigationMenuLink>
+                <a href="/redeem">
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent hover:bg-secondary/20 text-dark"
+                    )}
+                  >
+                    Redeem
+                  </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

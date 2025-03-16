@@ -21,7 +21,7 @@ class Test:
     def __init__(self):
         self.key = os.getenv("API_KEY")  # Ensure this is set in your .env file
 
-    def get_distance(self):
+    def get_distance(self, origin, destination):
         url = "https://routes.googleapis.com/directions/v2:computeRoutes"
         headers = {
             "Content-Type": "application/json",
@@ -30,10 +30,10 @@ class Test:
         }
         payload = {
             "origin": {
-                "address": "Waterloo, ON"
+                "address": origin
             },
             "destination": {
-                "address": "Milton, ON"
+                "address": destination
             },
             "travelMode": "DRIVE"
         }

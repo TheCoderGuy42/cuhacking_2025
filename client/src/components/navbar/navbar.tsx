@@ -157,14 +157,16 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent hover:bg-secondary/20 text-dark"
-                  )}
-                >
-                  Home
-                </NavigationMenuLink>
+                <a href="/">
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent hover:bg-secondary/20 text-dark"
+                    )}
+                  >
+                    Home
+                  </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink

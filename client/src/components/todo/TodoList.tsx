@@ -61,6 +61,80 @@ function TodoList({ searchTerm, locationFilter, maxTime }: TodoListProps) {
       website: "https://example.org",
       distance: 7200, // 2 hours
     },
+    {
+      id: 1,
+      title: "Web Developer & Research Assistant",
+      orginization: "@ Spill The Code",
+      orginizationTypes: "Education, Children, Youth and Family",
+      volunteerTypes:
+        "Arts, Crafts and Photography, Communications and Marketing",
+      commitment: "Short term (less than 6 months)",
+      location: "Ottawa - West",
+      applicationDeadline: "April 30, 2025",
+      website: "TO BE DETERMINED",
+      distance: 1200,
+    },
+    {
+      id: 2,
+      title: "Graphic Designer",
+      orginization: "Creative Commons",
+      orginizationTypes: "Arts and Culture",
+      volunteerTypes: "Design, Digital Media",
+      commitment: "Flexible",
+      location: "Remote",
+      applicationDeadline: "May 15, 2025",
+      website: "https://example.com",
+      distance: 3600, // 1 hour
+    },
+    {
+      id: 3,
+      title: "Community Organizer",
+      orginization: "Local Initiatives",
+      orginizationTypes: "Community Development",
+      volunteerTypes: "Event Planning, Outreach",
+      commitment: "Long term (more than 6 months)",
+      location: "Ottawa - West",
+      applicationDeadline: "June 1, 2025",
+      website: "https://example.org",
+      distance: 7200, // 2 hours
+    },
+    {
+      id: 1,
+      title: "Web Developer & Research Assistant",
+      orginization: "@ Spill The Code",
+      orginizationTypes: "Education, Children, Youth and Family",
+      volunteerTypes:
+        "Arts, Crafts and Photography, Communications and Marketing",
+      commitment: "Short term (less than 6 months)",
+      location: "Ottawa - West",
+      applicationDeadline: "April 30, 2025",
+      website: "TO BE DETERMINED",
+      distance: 1200,
+    },
+    {
+      id: 2,
+      title: "Graphic Designer",
+      orginization: "Creative Commons",
+      orginizationTypes: "Arts and Culture",
+      volunteerTypes: "Design, Digital Media",
+      commitment: "Flexible",
+      location: "Remote",
+      applicationDeadline: "May 15, 2025",
+      website: "https://example.com",
+      distance: 3600, // 1 hour
+    },
+    {
+      id: 3,
+      title: "Community Organizer",
+      orginization: "Local Initiatives",
+      orginizationTypes: "Community Development",
+      volunteerTypes: "Event Planning, Outreach",
+      commitment: "Long term (more than 6 months)",
+      location: "Ottawa - West",
+      applicationDeadline: "June 1, 2025",
+      website: "https://example.org",
+      distance: 7200, // 2 hours
+    },
   ]);
 
   const retrievePosts = async () => {
@@ -96,7 +170,8 @@ function TodoList({ searchTerm, locationFilter, maxTime }: TodoListProps) {
     return matchesSearch && matchesLocation && matchesTime;
   });
 
-  if (isLoading) return <div>Fetching posts...</div>;
+  if (isLoading)
+    return <div className="m-auto flex items-center">Fetching posts...</div>;
   if (error) return <div>An error occurred: {error.message}</div>;
 
   return (

@@ -20,13 +20,20 @@ def scrape():
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
 
+    # volunteer ottawa using elementor 
+    listings = soup.select("div.elementor-widget-wrap.elementor-element-populated")
+
+    
+
 
 # database connection 
 def connect():
     conn = psycopg2.connect(
         host="localhost",
-        database="postgres",
-        user="postgres",
+        port="5432",
+        dbname="volottdb",
+        user="user",
         password="password"
     )
     return
+

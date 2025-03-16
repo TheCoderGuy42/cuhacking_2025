@@ -8,12 +8,13 @@ import time
 from dotenv import load_dotenv
 import requests
 import json
-import cloudscraper 
+import cloudscraper
+from pypika import Table, Query
 
 load_dotenv()
 
-"""app = Flask(__name__)
-
+app = Flask(__name__)
+"""
 @app.route("/")
 def Testing():
     return "<p>Test</p>"
@@ -42,7 +43,7 @@ class Test:
         data = response.json()
         return data
 
-
+@app.route('/api/scrape')
 def scrape():
     url = "https://volunteerottawa.ca/volunteer/search-volunteer-opportunities/"
     scraper = cloudscraper.create_scraper()
@@ -130,12 +131,54 @@ def write_data(data):
             conn.commit()
 
 
+@app.route('/api/update_score/<id>/<score>')
+def update_score(id: str, score: int):
+    table = Table('user_score')
+    total_score = 0
+    
+    select_query = Query.from_(table).select().where(table.id == id)
+    with connect() as conn:
+        with conn.cursor() as cur:
+            raw_query = select_query.get_sql()
+            cur.execute(raw_query)
+            if cur.rowcount <= 0:
+                insert_query = Query.into(table).columns('id', 'score').insert(id, score)
+                raw_query = insert_query.get_sql()
+                cur.execute
+                
+                total_score = score
+            else:
+                total_score = int(cur.fetchone()[1]) + score
+                insert_query = Query.update(table).set(table.score, table.score + score).where(table.id == id)
+                raw_query = insert_query.get_sql()
+                cur.execute(raw_query)
+                
+            conn.commit()
+            
+    return total_score
+
+
+@app.route('/api/get_score/<id>')
+def update_score(id: str):
+    table = Table('user_score')    
+    select_query = Query.from_(table).select().where(table.id == id)
+    with connect() as conn:
+        with conn.cursor as cur:
+            raw_sql = select_query.get_sql()
+            cur.execute(raw_sql)
+            
+            if cur.rowcount() > 0:
+                return int(cur.fetchone()[1])
+    return None
+    
+
 if __name__ == "__main__":
-    test = Test()
-    create_table()
-    data = scrape()
-    print(f"Scraped {len(data)} listings.")
-    write_data(data)
-    print("Data written to database.")
-    # distance = test.get_distance()
+    app.run()
+    # test = Test()
+    # create_table()
+    # data = scrape()
+    # print(f"Scraped {len(data)} listings.")
+    # write_data(data)
+    # print("Data written to database.")
+    # # distance = test.get_distance()
     # print(distance)

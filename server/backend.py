@@ -159,7 +159,7 @@ def update_score(id: str, score: int):
 
 
 @app.route('/api/get_score/<id>')
-def update_score(id: str):
+def get_score(id: str):
     table = Table('user_score')    
     select_query = Query.from_(table).select().where(table.id == id)
     with connect() as conn:

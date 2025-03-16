@@ -37,3 +37,21 @@ def connect():
     )
     return
 
+## create the actual table for caching 
+def create_table():
+    sql = """
+    CREATE TABLE IF NOT EXISTS listings (
+        id SERIAL PRIMARY KEY,
+        data JSONB
+    );
+    """
+    with connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            conn.commit()
+
+
+def scrape():
+    url = "https://volunteerottawa.ca/volunteer/search-volunteer-opportunities/"
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.text, "html.parser")

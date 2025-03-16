@@ -49,9 +49,3 @@ def create_table():
         with conn.cursor() as cur:
             cur.execute(sql)
             conn.commit()
-
-
-def scrape():
-    url = "https://volunteerottawa.ca/volunteer/search-volunteer-opportunities/"
-    resp = requests.get(url)
-    soup = BeautifulSoup(resp.text, "html.parser")

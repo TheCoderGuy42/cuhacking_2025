@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import todoRoutes from "./routes/todoRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,21 +14,8 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// Sample todo API endpoints
-app.get("/api/todos", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      title: "Sample Todo 1",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Sample Todo 2",
-      completed: true,
-    },
-  ]);
-});
+// Use todo routes
+app.use("/api/todos", todoRoutes);
 
 // Start server
 app.listen(PORT, () => {

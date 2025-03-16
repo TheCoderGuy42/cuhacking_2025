@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import TodoList from "./components/todo/TodoList";
 import NavBar from "./components/navbar/navbar";
-import RedeemPage from "./components/redeem/RedeemPage.tsx";
+import RedeemPage from "./components/redeem/RedeemPage";
 
 function Title() {
   return (

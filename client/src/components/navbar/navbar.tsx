@@ -34,7 +34,6 @@ interface NavBarProps {
   onLocationChange: (value: string) => void;
   onMaxTimeChange: (value: number) => void;
 }
-
 function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
   const [searchValue, setSearchValue] = React.useState("");
   const [locationValue, setLocationValue] = React.useState("all");
@@ -109,30 +108,8 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-md font-medium flex items-center text-dark">
-                        <MapPin className="h-4 w-4 mr-2 text-primary" />
-                        Location
-                      </label>
-                      <Select
-                        value={locationValue}
-                        onValueChange={setLocationValue}
-                      >
-                        <SelectTrigger className="border-secondary/30 focus:ring-primary w-full">
-                          <SelectValue placeholder="Select location" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Locations</SelectItem>
-                          <SelectItem value="Ottawa - West">
-                            Ottawa - West
-                          </SelectItem>
-                          <SelectItem value="Remote">Remote</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
                     <div className="space-y-3">
-                      <label className="text-md font-medium flex items-center justify-between text-dark">
+                      <label className="text-md font-medium flex items-center justify-betweentext-dark">
                         <div className="flex items-center">
                           <Clock className="h-4 w-4 mr-2 text-primary" />
                           Maximum Travel Time
@@ -176,24 +153,16 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent hover:bg-secondary/20 text-dark"
-                  )}
-                >
-                  Home
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent hover:bg-secondary/20 text-dark"
-                  )}
-                >
-                  About
-                </NavigationMenuLink>
+                <a href="/">
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent hover:bg-secondary/20 text-dark"
+                    )}
+                  >
+                    Home
+                  </NavigationMenuLink>
+                </a>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <a href="/redeem">
@@ -218,6 +187,19 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
           >
             {user ? <LogoutButton /> : <LoginButton />}
           </Button>
+
+          {user && (
+            <div className="absolute top-2 left-2 flex items-center">
+              <span className="relative flex h-4 w-4">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
+
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-orange-500"></span>
+              </span>
+              <span className="ml-1 text-s font-semibold text-orange-600">
+                0
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

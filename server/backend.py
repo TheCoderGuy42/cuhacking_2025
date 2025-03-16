@@ -94,24 +94,15 @@ def scrape():
     return listings
 
 
-
-
-if __name__ == "__main__":
-    test = Test()
-    distance = test.get_distance()
-    print(distance)
-
-
 # database connection 
 def connect():
-    conn = psycopg2.connect(
+    return psycopg2.connect(
         host="localhost",
         port="5432",
         dbname="volottdb",
         user="user",
         password="password"
     )
-    return
 
 ## create the actual table for caching 
 def create_table():
@@ -125,3 +116,22 @@ def create_table():
         with conn.cursor() as cur:
             cur.execute(sql)
             conn.commit()
+
+# have to write the scrapped data into the db
+def write_data(data):
+    sql = "INSERT INTO listings (data) VALUES (%s);"
+    with connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, (json.dumps(data),))
+            conn.commit()
+
+
+if __name__ == "__main__":
+    test = Test()
+    create_table()
+    data = scrape()
+    print(f"Scraped {len(data)} listings.")
+    write_data(data)
+    print("Data written to database.")  
+    distance = test.get_distance()
+    print(distance)

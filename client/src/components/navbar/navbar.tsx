@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import * as React from "react";
 import { cn } from "../../lib/utils";
@@ -23,7 +23,13 @@ import { Slider } from "../../components/ui/slider";
 import { Button } from "../../components/ui/button";
 import { Search, Filter, Clock, MapPin, Home } from "lucide-react";
 import { Input } from "../../components/ui/input";
-import { Badge } from "../../components/ui/badge";
+// import { Badge } from "../../components/ui/badge";
+import LoginButton from "../auth/LoginButton";
+import { useState } from "react";
+import { useEffect } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../auth/firebase";
+import LogoutButton from "../auth/LogoutButton";
 
 interface NavBarProps {
   onSearch: (value: string) => void;
@@ -55,6 +61,17 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
     onMaxTimeChange(240);
     setIsFilterActive(false);
   };
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="w-full bg-white/80 backdrop-blur-sm border-b border-secondary/30 sticky top-0 z-50 px-4 py-2">
@@ -130,7 +147,9 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
                         defaultValue={[maxTimeValue]}
                         max={240}
                         step={10}
-                        onValueChange={(values) => setMaxTimeValue(values[0])}
+                        onValueChange={(
+                          values: React.SetStateAction<number>[]
+                        ) => setMaxTimeValue(values[0])}
                         className="py-2"
                       />
                       <div className="flex justify-between text-xs text-muted-foreground">
@@ -197,7 +216,7 @@ function NavBar({ onSearch, onLocationChange, onMaxTimeChange }: NavBarProps) {
             variant="outline"
             className="mr-10 rounded-full border-secondary/30 text-dark hover:bg-secondary/20"
           >
-            Login
+            {user ? <LogoutButton /> : <LoginButton />}
           </Button>
         </div>
       </div>

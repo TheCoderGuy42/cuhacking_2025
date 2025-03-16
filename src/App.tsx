@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../client/App.css";
+import LoginButton from "../client/src/components/LoginButton";
+import LogoutButton from "../client/src/components/LogoutButton";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../client/src/components/firebase";
 
 interface cardProp {
   title: string;
@@ -39,8 +43,29 @@ const TodoPost = ({
 
 function App() {
   const [Todo, setTodo] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <>
+      {!user ? <LoginButton /> : <LogoutButton />}
+      {user ? (
+        <div>
+          Name: {user.displayName} <br />
+          Email: {user.email} <br />
+          <img src={user.photoURL?.toString()} alt="" />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <TodoPost
